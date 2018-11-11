@@ -1,0 +1,39 @@
+{
+  "name": "@iarna/modbot",
+  "version": "1.0.0",
+  "server": "modbot.js",
+  "dependencies": {
+    "@iarna/cli": "^2.0.2",
+    "@iarna/discobot": "file:../discobot",
+    "@iarna/toml": "^2.2.0"
+  },
+  "author": {
+    "name": "Rebecca Turner",
+    "email": "me@re-becca.org",
+    "twitter": "ReBeccaOrg"
+  },
+  "license": "ISC",
+  "scripts": {
+    "prerelease": "npm t",
+    "release": "standard-version -s",
+    "postrelease": "npm publish && git push --follow-tags",
+    "pretest": "standard",
+    "test": "tap -J -100 test/*.js",
+    "update-coc": "weallbehave -o . && git add CODE_OF_CONDUCT.md && git commit -m 'docs(coc): updated CODE_OF_CONDUCT.md'",
+    "update-contrib": "weallcontribute -o . && git add CONTRIBUTING.md && git commit -m 'docs(contributing): updated CONTRIBUTING.md'"
+  },
+  "devDependencies": {
+    "weallbehave": "*",
+    "weallcontribute": "*",
+    "standard": "*",
+    "standard-version": "*",
+    "tap": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iarna/iarna-modbot.git"
+  },
+  "bugs": "https://github.com/iarna/iarna-modbot/issues",
+  "homepage": "https://npmjs.com/package/@iarna/modbot",
+  "description": "Moderation actions for my Discord servers"
+}
