@@ -4,7 +4,7 @@
   "server": "modbot.js",
   "dependencies": {
     "@iarna/cli": "^2.0.2",
-    "@iarna/discobot": "file:../discobot",
+    "@iarna/discobot": "^1.0.0",
     "@iarna/toml": "^2.2.0"
   },
   "author": {
