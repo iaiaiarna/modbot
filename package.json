@@ -32,9 +32,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iarna/iarna-modbot.git"
+    "url": "https://github.com/iaiaiarna/modbot.git"
   },
-  "bugs": "https://github.com/iarna/iarna-modbot/issues",
+  "bugs": "https://github.com/iaiaiarna/modbot/issues",
   "homepage": "https://npmjs.com/package/@iarna/modbot",
   "description": "Moderation actions for my Discord servers"
 }
