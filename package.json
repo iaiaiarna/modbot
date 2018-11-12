@@ -1,6 +1,7 @@
 {
   "name": "@iarna/modbot",
   "version": "1.0.1",
+  "bin": "modbot.js",
   "server": "modbot.js",
   "dependencies": {
     "@iarna/cli": "^2.0.2",
