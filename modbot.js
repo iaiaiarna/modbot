@@ -45,5 +45,12 @@ async function main (opts, conffile) {
       }
     }
   })
+  if (bot.conf.welcome) {
+    bot.addCommand(DiscoBot.Welcome, {
+      action: async function ($) {
+        return $.server.welcome.send(bot.conf.welcome.replace(/[{]user[}]/, $.msg.user), {split: true})
+      }
+    })
+  }
   await bot.login()
 }
