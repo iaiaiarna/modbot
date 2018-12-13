@@ -7,12 +7,13 @@ require('@iarna/cli')(main)
   .help()
 
 const DiscoBot = require('@iarna/discobot')
+const Discord = require('discord.js')
 const fs = require('fs')
 const TOML = require('@iarna/toml')
 
 // @iarna/cli above will run this when the process starts
 async function main (opts, conffile) {
-  const bot = await DiscoBot.create(Object.assign({ emoji: { report: 'report' } }, TOML.parse(fs.readFileSync(conffile))))
+  const bot = await DiscoBot.create(TOML.parse(fs.readFileSync(conffile)))
   bot.addCommand('report', {
     usage: 'report <reason...>',
     description: 'report inappropriate activity',
@@ -52,5 +53,21 @@ async function main (opts, conffile) {
       }
     })
   }
+  bot.addReaction('report', async function ($) {
+    const report = `Reporting ${$.msg.author} saying:\n${$.msg}`
+    console.log(`**EMOJI REPORT** from ${this.name($.user)} in ${this.name($.msg.channel)}: ${report}`)
+    await $.mr.remove($.user)
+    let embed
+    const files = $.msg.attachments.map(_ => new Discord.Attachment(_.url, _.filename))
+    if (files.length) {
+      embed = new Discord.RichEmbed({ author: $.msg.author })
+      if ($.msg.attachments) embed.attachFiles(files)
+    }
+    await $.server.moderation.send(`@here **EMOJI REPORT** from ${$.user} in ${$.msg.channel}: ${report}`, { split: true, embed })
+    return Promise.all([
+      $.msg.react($.mr.emoji),
+      this.sendDM($.user, `Report in ${$.msg.channel} has been sent to moderators: ${report}`, { split: true, embed })
+    ])
+  })
   await bot.login()
 }
